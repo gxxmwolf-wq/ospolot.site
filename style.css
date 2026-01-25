@@ -712,3 +712,54 @@ footer {
     font-weight: 600;
     color: var(--primary);
 }
+
+/* --- ЛОГОТИП В СТИЛЕ УПАКОВКИ + АКЦЕНТ САЙТА --- */
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+/* Группировка текста для выравнивания по базовой линии */
+.logo-text-group {
+    display: flex;
+    align-items: baseline;
+    /* Используем чистый шрифт без засечек для четкости */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1;
+    margin-top: 2px;
+}
+
+/* Стиль слова "Ospolot" (Черный, как на коробке) */
+.brand-ospolot {
+    font-weight: 800;       /* Самый жирный */
+    font-size: 24px;
+    color: #2c3e50;         /* Глубокий темный цвет (основной цвет текста на сайте) */
+    letter-spacing: -0.5px; /* Плотная посадка */
+}
+
+/* Стиль слова "Original" (Синий, четкий, уменьшенный) */
+.brand-original {
+    font-weight: 700;       /* Жирный, но чуть меньше, чем Ospolot */
+    font-size: 20px;        /* Уменьшенный размер по вашему запросу */
+    margin-left: 8px;       /* Чуть больше отступ */
+    color: #3498db;         /* Тот самый синий цвет кнопок */
+    
+    /* Убираем старую обводку */
+    -webkit-text-stroke: 0;
+    text-stroke: 0;
+    text-shadow: none;
+
+    /* ДОБАВЛЕНИЕ ЧЕТКОСТИ */
+    letter-spacing: 0.5px;  /* Немного воздуха между буквами для ясности */
+    -webkit-font-smoothing: antialiased; /* Сглаживание для четких краев (Mac/Webkit) */
+    -moz-osx-font-smoothing: grayscale;  /* Сглаживание для Firefox */
+}
+
+/* На мобильном чуть уменьшим пропорционально */
+@media (max-width: 400px) {
+    .brand-ospolot { font-size: 20px; }
+    .brand-original { font-size: 17px; }
+}
+
