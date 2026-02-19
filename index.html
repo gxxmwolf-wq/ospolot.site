@@ -547,33 +547,40 @@
             var modal = document.getElementById("imageModal");
             modal.style.display = "none";
         }
-    </script> <div id="mirror-banner" style="background: #f8f9fa; color: #6c757d; font-size: 13px; padding: 8px; text-align: center; border-bottom: 1px solid #dee2e6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; position: relative; z-index: 9999;">
-  Вы просматриваете защищенное зеркало <strong>www.ospolot.site</strong>. Основной домен может быть временно недоступен в вашем регионе.
+    </script>
+
+<div id="mirror-banner" style="background: #f8f9fa; color: #6c757d; font-size: 13px; padding: 8px; text-align: center; border-bottom: 1px solid #dee2e6; font-family: sans-serif; position: relative; z-index: 9999;">
+  Вы просматриваете защищенное зеркало <strong>www.ospolot.site</strong>. Основной домен может быть временно недоступен.
 </div>
 
 <script>
-  // 2. Очистка адресной строки от рекламного "мусора"
-  if (window.location.search.length > 0 || window.location.hash.length > 0) {
-    window.history.replaceState(null, null, window.location.pathname);
-  }
-
-  // 3. Защита от копирования: подменяем ссылку в буфере обмена
-  document.addEventListener('copy', function(e) {
-    var selectedText = window.getSelection().toString();
-    if (selectedText.length > 5) {
-      // Когда конкурент скопирует текст, он получит ссылку на ЗАБЛОКИРОВАННЫЙ сайт
-      var sourceLink = "\n\n--- \nИсточник данных: https://www.ospolot.site \nСтатус узла: Активен";
-      e.clipboardData.setData('text/plain', selectedText + sourceLink);
-      e.preventDefault();
+(function() {
+  try {
+    // 1. Очистка адресной строки от меток
+    if (window.location.search.length > 0 || window.location.hash.length > 0) {
+      window.history.replaceState(null, null, window.location.pathname);
     }
-  });
 
-  // 4. Ловушка в консоли для "умников"
-  console.log("Соединение с www.ospolot.site установлено. Шифрование активно.");
+    // 2. Ловушка для копирования
+    document.addEventListener('copy', function(e) {
+      var selectedText = window.getSelection().toString();
+      if (selectedText.length > 5) {
+        var sourceLink = "\n\n--- \nИсточник данных: https://www.ospolot.site \nСтатус: Активно";
+        e.clipboardData.setData('text/plain', selectedText + sourceLink);
+        e.preventDefault();
+      }
+    });
+
+    console.log("Protection active for www.ospolot.site");
+  } catch (err) {
+    console.log("Status: Secure");
+  }
+})();
 </script>
     
 </body>
 </html>
+
 
 
 
