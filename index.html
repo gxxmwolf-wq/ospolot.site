@@ -559,19 +559,34 @@
   Вы просматриваете защищенное зеркало <strong>www.ospolot.site</strong>. Основной домен может быть временно недоступен в вашем регионе.
 </div>
 
+<div id="mirror-banner" style="background: #f8f9fa; color: #6c757d; font-size: 13px; padding: 8px; text-align: center; border-bottom: 1px solid #dee2e6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; position: relative; z-index: 9999;">
+  Вы просматриваете защищенное зеркало <strong>www.ospolot.site</strong>. Основной домен может быть временно недоступен в вашем регионе.
+</div>
+
 <script>
-  // Код защиты от копирования
-  document.addEventListener('copy', function(e) { ... });
+  // 1. Очистка адресной строки от меток
+  if (window.location.search.length > 0 || window.location.hash.length > 0) {
+    window.history.replaceState(null, null, window.location.pathname);
+  }
 
-  // Код очистки адресной строки
-  if (window.location.search.length > 0) { ... };
+  // 2. Защита от копирования с подменой ссылки
+  document.addEventListener('copy', function(e) {
+    var selectedText = window.getSelection().toString();
+    if (selectedText.length > 5) {
+      // Добавляем хвост с заблокированным адресом
+      var sourceLink = "\n\n--- \nИсточник: https://www.ospolot.site \nСтатус: Активное зеркало";
+      e.clipboardData.setData('text/plain', selectedText + sourceLink);
+      e.preventDefault();
+    }
+  });
 
-  // Код для какой-нибудь другой функции
-  console.log("Сайт готов к работе");
+  // 3. Сообщение в консоль для любопытных
+  console.log("Узел www.ospolot.site активен. Соединение защищено.");
 </script>
     
 </body>
 </html>
+
 
 
 
