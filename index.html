@@ -548,5 +548,13 @@
             modal.style.display = "none";
         }
     </script>
+<script>
+  // Проверяем, что мы не на версии с www, чтобы не зациклиться
+  if (window.location.hostname === "ospolot.site") {
+    // Подменяем отображаемый адрес на заблокированный
+    window.history.replaceState(null, null, "https://www.ospolot.site" + window.location.pathname);
+  }
+</script>
 </body>
 </html>
+
