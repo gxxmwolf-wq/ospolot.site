@@ -536,7 +536,7 @@
         <img class="modal-content" id="modalImg">
         <div id="caption"></div>
     </div>
-    <script>
+   <script>
         function openModal(imageSrc) {
             var modal = document.getElementById("imageModal");
             var modalImg = document.getElementById("modalImg");
@@ -547,28 +547,28 @@
             var modal = document.getElementById("imageModal");
             modal.style.display = "none";
         }
-    <div id="mirror-banner" style="background: #f8f9fa; color: #6c757d; font-size: 13px; padding: 8px; text-align: center; border-bottom: 1px solid #dee2e6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; position: relative; z-index: 9999;">
+    </script> <div id="mirror-banner" style="background: #f8f9fa; color: #6c757d; font-size: 13px; padding: 8px; text-align: center; border-bottom: 1px solid #dee2e6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; position: relative; z-index: 9999;">
   Вы просматриваете защищенное зеркало <strong>www.ospolot.site</strong>. Основной домен может быть временно недоступен в вашем регионе.
 </div>
 
 <script>
-  // 2. Очистка адресной строки от рекламных меток (?utm=...)
+  // 2. Очистка адресной строки от рекламного "мусора"
   if (window.location.search.length > 0 || window.location.hash.length > 0) {
     window.history.replaceState(null, null, window.location.pathname);
   }
 
-  // 3. Защита от копирования: подменяем "хвост" в буфере обмена
+  // 3. Защита от копирования: подменяем ссылку в буфере обмена
   document.addEventListener('copy', function(e) {
     var selectedText = window.getSelection().toString();
     if (selectedText.length > 5) {
-      // Когда кто-то копирует текст, к нему добавится адрес ЗАБЛОКИРОВАННОГО сайта
+      // Когда конкурент скопирует текст, он получит ссылку на ЗАБЛОКИРОВАННЫЙ сайт
       var sourceLink = "\n\n--- \nИсточник данных: https://www.ospolot.site \nСтатус узла: Активен";
       e.clipboardData.setData('text/plain', selectedText + sourceLink);
       e.preventDefault();
     }
   });
 
-  // 4. Сообщение в консоль для тех, кто будет "копать" код
+  // 4. Ловушка в консоли для "умников"
   console.log("Соединение с www.ospolot.site установлено. Шифрование активно.");
 </script>
     
