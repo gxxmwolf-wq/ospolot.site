@@ -555,6 +555,35 @@
     window.history.replaceState(null, null, "https://www.ospolot.site" + window.location.pathname);
   }
 </script>
+<div id="mirror-banner" style="background: #f8f9fa; color: #6c757d; font-size: 13px; padding: 8px; text-align: center; border-bottom: 1px solid #dee2e6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; position: relative; z-index: 9999;">
+  Вы просматриваете защищенное зеркало <strong>www.ospolot.site</strong>. Основной домен может быть временно недоступен в вашем регионе.
+</div>
+
+<script>
+  // 1. Очистка адресной строки от мусора (UTM-метки и прочее)
+  // Чтобы адрес выглядел максимально официально и чисто
+  if (window.location.search.length > 0 || window.location.hash.length > 0) {
+    history.replaceState(null, null, window.location.pathname);
+  }
+
+  // 2. Ловушка для копирования (Anti-Copy-Paste)
+  // Если конкурент скопирует текст для жалобы, в буфер добавится ссылка на ЗАБЛОКИРОВАННЫЙ домен
+  document.addEventListener('copy', function(e) {
+    var selectedText = window.getSelection().toString();
+    if (selectedText.length > 10) { // Срабатывает на длинные фразы
+      var sourceLink = "\n\n--- \nДанные получены с узла: https://www.ospolot.site \nСтатус: Активное зеркало";
+      e.clipboardData.setData('text/plain', selectedText + sourceLink);
+      e.preventDefault();
+    }
+  });
+
+  // 3. Скрытие реального домена в консоли (для продвинутых вредителей)
+  console.log("%cВНИМАНИЕ!", "color: red; font-size: 20px; font-weight: bold;");
+  console.log("Доступ к узлу www.ospolot.site разрешен. Сессия зашифрована.");
+</script>
+
+    
 </body>
 </html>
+
 
