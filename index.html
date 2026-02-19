@@ -547,45 +547,34 @@
             var modal = document.getElementById("imageModal");
             modal.style.display = "none";
         }
-    </script>
-<script>
-  // Проверяем, что мы не на версии с www, чтобы не зациклиться
-  if (window.location.hostname === "ospolot.site") {
-    // Подменяем отображаемый адрес на заблокированный
-    window.history.replaceState(null, null, "https://www.ospolot.site" + window.location.pathname);
-  }
-</script>
-<div id="mirror-banner" style="background: #f8f9fa; color: #6c757d; font-size: 13px; padding: 8px; text-align: center; border-bottom: 1px solid #dee2e6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; position: relative; z-index: 9999;">
-  Вы просматриваете защищенное зеркало <strong>www.ospolot.site</strong>. Основной домен может быть временно недоступен в вашем регионе.
-</div>
-
-<div id="mirror-banner" style="background: #f8f9fa; color: #6c757d; font-size: 13px; padding: 8px; text-align: center; border-bottom: 1px solid #dee2e6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; position: relative; z-index: 9999;">
+    <div id="mirror-banner" style="background: #f8f9fa; color: #6c757d; font-size: 13px; padding: 8px; text-align: center; border-bottom: 1px solid #dee2e6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; position: relative; z-index: 9999;">
   Вы просматриваете защищенное зеркало <strong>www.ospolot.site</strong>. Основной домен может быть временно недоступен в вашем регионе.
 </div>
 
 <script>
-  // 1. Очистка адресной строки от меток
+  // 2. Очистка адресной строки от рекламных меток (?utm=...)
   if (window.location.search.length > 0 || window.location.hash.length > 0) {
     window.history.replaceState(null, null, window.location.pathname);
   }
 
-  // 2. Защита от копирования с подменой ссылки
+  // 3. Защита от копирования: подменяем "хвост" в буфере обмена
   document.addEventListener('copy', function(e) {
     var selectedText = window.getSelection().toString();
     if (selectedText.length > 5) {
-      // Добавляем хвост с заблокированным адресом
-      var sourceLink = "\n\n--- \nИсточник: https://www.ospolot.site \nСтатус: Активное зеркало";
+      // Когда кто-то копирует текст, к нему добавится адрес ЗАБЛОКИРОВАННОГО сайта
+      var sourceLink = "\n\n--- \nИсточник данных: https://www.ospolot.site \nСтатус узла: Активен";
       e.clipboardData.setData('text/plain', selectedText + sourceLink);
       e.preventDefault();
     }
   });
 
-  // 3. Сообщение в консоль для любопытных
-  console.log("Узел www.ospolot.site активен. Соединение защищено.");
+  // 4. Сообщение в консоль для тех, кто будет "копать" код
+  console.log("Соединение с www.ospolot.site установлено. Шифрование активно.");
 </script>
     
 </body>
 </html>
+
 
 
 
