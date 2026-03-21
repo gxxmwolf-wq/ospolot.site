@@ -507,9 +507,14 @@
                     Написать в Telegram
                 </a>
 
+                <a href="#" onclick="openContact(event, 'sms')" class="btn-messenger btn-sms" style="display: flex; align-items: center; justify-content: center; padding: 12px 20px; border-radius: 4px; background-color: #f39c12; color: white; text-decoration: none; font-weight: 600; font-size: 16px; transition: background 0.2s;">
+                    <svg style="width:20px;height:20px;fill:white;margin-right:10px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+                    Отправить SMS-заявку
+                </a>
+
                 <a href="#" onclick="openContact(event, 'em')" class="btn-messenger btn-email" style="display: flex; align-items: center; justify-content: center; padding: 12px 20px; border-radius: 4px; background-color: #34495e; color: white; text-decoration: none; font-weight: 600; font-size: 16px; transition: background 0.2s;">
                     <svg style="width:20px;height:20px;fill:white;margin-right:12px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    Написать на Email (Заказ)
+                    Написать на Email
                 </a>
                 
             </div>
@@ -517,34 +522,47 @@
             <div style="border-top: 1px solid #eee; padding-top: 20px; color: #999; margin-top: 40px; text-align: center;">
                 <p>Информационный ресурс сервиса доставки.</p>
                 <p style="font-size: 12px; margin-top: 5px;">Имеются противопоказания. Перед применением проконсультируйтесь с врачом.</p>
+                <p style="font-size: 11px; margin-top: 15px; color: #aaa; line-height: 1.4; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Продолжая использовать наш сайт, вы даете согласие на обработку файлов cookie и пользовательских данных (включая IP-адрес) в целях функционирования сайта и проведения статистических исследований. Сайт не осуществляет сбор персональных данных через формы обратной связи.
+                </p>
             </div>
         </div>
 
         <script>
-            // =======================================================
-            // НАСТРОЙКА САЙТА: ПРОСТО ВПИШИТЕ НАЗВАНИЕ ПРЕПАРАТА
-            // =======================================================
             var currentDrugName = "Ospolot"; 
-            // =======================================================
 
             function openContact(e, type) {
                 e.preventDefault(); 
                 
-                // Зашифрованные контакты (боты их не увидят)
-                var phone = "7965" + "030" + "2556";
-                var email = "med.zakaz" + ".de" + "@gmail.com";
+                var p1 = "7965";
+                var p2 = "030";
+                var p3 = "2556";
+                var phone = p1 + p2 + p3;
                 
-                // Автоматическая генерация текстов с названием препарата
-                var textWa = encodeURIComponent("Здравствуйте. У меня вопрос по оригинальному немецкому препарату " + currentDrugName + ".");
-                var textEmSubj = encodeURIComponent("Заказ " + currentDrugName + " с сайта");
-                var textEmBody = encodeURIComponent("Здравствуйте, я хочу сделать заказ на немецкий препарат " + currentDrugName + ". Меня интересует стоимость и сроки доставки в город: [Ваш Город]. Дополнительная информация: [Укажите дозировку и количество]");
-
-                // Распределение по мессенджерам (защита от блокировок web-версий)
+                var e1 = "med.zakaz";
+                var e2 = ".de";
+                var e3 = "@gmail.com";
+                var email = e1 + e2 + e3;
+                
                 if (type === 'wa') {
+                    var textWa = encodeURIComponent("Здравствуйте. У меня вопрос по оригинальному немецкому препарату " + currentDrugName + ".");
                     window.location.href = "whatsapp://send?phone=" + phone + "&text=" + textWa;
+                    
                 } else if (type === 'tg') {
                     window.location.href = "tg://resolve?phone=" + phone;
+                    
+                } else if (type === 'sms') {
+                    var textSms = encodeURIComponent("Здравствуйте. Хочу узнать цену и сроки доставки препарата " + currentDrugName + ".");
+                    var isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+                    if (isIos) {
+                        window.location.href = "sms:+" + phone + "&body=" + textSms;
+                    } else {
+                        window.location.href = "sms:+" + phone + "?body=" + textSms;
+                    }
+                    
                 } else if (type === 'em') {
+                    var textEmSubj = encodeURIComponent("Заказ " + currentDrugName + " с сайта");
+                    var textEmBody = encodeURIComponent("Здравствуйте, я хочу сделать заказ на немецкий препарат " + currentDrugName + ". Меня интересует стоимость и сроки доставки в город: [Ваш Город]. Дополнительная информация: [Укажите дозировку и количество]");
                     window.location.href = "mailto:" + email + "?subject=" + textEmSubj + "&body=" + textEmBody;
                 }
             }
